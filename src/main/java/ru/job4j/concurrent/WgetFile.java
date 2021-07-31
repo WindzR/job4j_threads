@@ -30,16 +30,15 @@ public class WgetFile implements Runnable {
             int bytesRead;
             long start = System.currentTimeMillis();
             while ((bytesRead = in.read(dataBuffer, 0, speed * 1024)) != -1) {
+                fileOutputStream.write(dataBuffer, 0, bytesRead);
                 long finish = System.currentTimeMillis();
                 System.out.println("Time of download cluster --> "+ (finish - start));
                 long difference = 1000 - (finish - start);
-//                System.out.println(difference);
+                System.out.println(difference);
                 if (finish - start < 1000) {
                     Thread.sleep(difference);
                     start = System.currentTimeMillis();
                 }
-                fileOutputStream.write(dataBuffer, 0, bytesRead);
-                Thread.sleep(100);
             }
         } catch (IOException | InterruptedException e) {
             Thread.currentThread().interrupt();
