@@ -10,11 +10,10 @@ public class ContentFile {
         StringBuffer output = new StringBuffer();
         byte[] buffer = new byte[1024];
         synchronized (this) {
-            while (in.read(buffer, 0, 1024) > 0) {
-                for (byte data : buffer) {
-                    if (filter.test((char) data)) {
-                        output.append((char) data);
-                    }
+            int data;
+            while ((data = in.read(buffer, 0, 1024)) > 0) {
+                if (filter.test((char) data)) {
+                    output.append((char) data);
                 }
             }
         }
