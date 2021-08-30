@@ -39,15 +39,12 @@ public class UserStorage {
     }
 
     public synchronized boolean transfer(int fromId, int toId, int amount) {
-        UserStorage storage = new UserStorage();
         boolean result = false;
         User source = store.get(fromId);
         User destination = store.get(toId);
         if(source.getAmount() >= amount) {
             source.setAmount(source.getAmount() - amount);
             destination.setAmount(destination.getAmount() + amount);
-            storage.update(source);
-            storage.update(destination);
             result = true;
         }
         return result;
