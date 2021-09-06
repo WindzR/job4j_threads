@@ -12,9 +12,13 @@ public class SimpleBlockingQueueTest {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(2);
         Thread producer = new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " start");
-            queue.offer(1);
-            queue.offer(2);
-            queue.offer(3);
+            try {
+                queue.offer(1);
+                queue.offer(2);
+                queue.offer(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }, "producer");
         producer.start();
         Thread.sleep(500);
@@ -26,7 +30,11 @@ public class SimpleBlockingQueueTest {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(2);
         Thread consumer = new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " start");
-            queue.poll();
+            try {
+                queue.poll();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }, "consumer");
         consumer.start();
         Thread.sleep(500);
@@ -38,15 +46,23 @@ public class SimpleBlockingQueueTest {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(2);
         Thread producer = new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " start");
-            queue.offer(1);
-            queue.offer(2);
-            queue.offer(3);
+            try {
+                queue.offer(1);
+                queue.offer(2);
+                queue.offer(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }, "producer");
         Thread consumer = new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " start");
-            queue.poll();
-            queue.poll();
-            queue.poll();
+            try {
+                queue.poll();
+                queue.poll();
+                queue.poll();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }, "consumer");
         producer.start();
         consumer.start();
