@@ -5,6 +5,7 @@ import net.jcip.annotations.ThreadSafe;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @ThreadSafe
 public class UserStorage {
@@ -42,7 +43,13 @@ public class UserStorage {
         boolean result = false;
         User source = store.get(fromId);
         User destination = store.get(toId);
-        if(source.getAmount() >= amount) {
+        if (Objects.isNull(source)) {
+            throw new IllegalArgumentException(String.format("User with id %d does not exist!", fromId));
+        }
+        if (Objects.isNull(destination)) {
+            throw new IllegalArgumentException(String.format("User with id %d does not exist!", toId));
+        }
+        if (source.getAmount() >= amount) {
             source.setAmount(source.getAmount() - amount);
             destination.setAmount(destination.getAmount() + amount);
             result = true;
