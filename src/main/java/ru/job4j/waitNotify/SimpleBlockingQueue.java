@@ -20,6 +20,7 @@ public class SimpleBlockingQueue<T> {
         while (queue.size() == limit) {
             wait();
         }
+        notifyAll();
         queue.add(value);
     }
 
@@ -27,6 +28,7 @@ public class SimpleBlockingQueue<T> {
         while (queue.size() == 0) {
             wait();
         }
+        notifyAll();
         return queue.remove();
     }
 
