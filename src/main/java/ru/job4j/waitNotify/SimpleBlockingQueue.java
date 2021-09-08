@@ -35,4 +35,8 @@ public class SimpleBlockingQueue<T> {
     public synchronized int size() {
         return queue.size();
     }
+
+    public boolean isEmpty() {
+        return size() == 0;
+    }
 }
