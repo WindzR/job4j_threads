@@ -3,3 +3,8 @@
 [![Build Status](https://travis-ci.com/WindzR/job4j_threads.svg?branch=master)](https://travis-ci.com/WindzR/job4j_threads)
 
 represent is study project concurrent on practice 
+
+# change README.md
+
+* создание новой ветки hotfix_139840
+* задача по созданию новой ветки из IDEA
